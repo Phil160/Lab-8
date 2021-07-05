@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -43,6 +44,33 @@ public class StudentController {
             return "student/newstudentform";
         }
         student=studentService.saveStudent(student);
+        return "redirect:/student/list";
+    }
+    @GetMapping(value = {"/student/edit/{studentId}"})
+    public String editStudent(@PathVariable Long studentId, Model model){
+        Student student= studentService.getStudentById(studentId);
+        if(student != null){
+            model.addAttribute("student",student);
+            return "student/edit";
+        }else{
+
+        }
+        return "student/list";
+    }
+    @PostMapping(value = {"/student/edit"})
+    public String updateStudent(@Valid @ModelAttribute Student student,
+                                BindingResult bindingResult,
+                                Model model){
+        if (bindingResult.hasErrors()){
+            model.addAttribute("errors",bindingResult.getAllErrors());
+            return "student/edit";
+        }
+       student=studentService.saveStudent(student);
+        return "redirect:/student/list";
+    }
+    @GetMapping(value = {"/student/delete/{studentId}"})
+    public String deleteStudent(@PathVariable Long studentId, Model model){
+        studentService.deleteStudentById(studentId);
         return "redirect:/student/list";
     }
 }

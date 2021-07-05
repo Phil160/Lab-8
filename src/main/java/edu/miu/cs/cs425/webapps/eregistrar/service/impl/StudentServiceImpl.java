@@ -5,6 +5,7 @@ import edu.miu.cs.cs425.webapps.eregistrar.repository.StudentRepository;
 import edu.miu.cs.cs425.webapps.eregistrar.service.StudentService;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Book;
 import java.util.List;
 
 @Service
@@ -23,5 +24,15 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student saveStudent(Student student) {
         return studentRepository.save(student);
+    }
+
+    @Override
+    public Student getStudentById(Long studentId) {
+        return studentRepository.findById(studentId).orElse(null);
+    }
+
+    @Override
+    public void deleteStudentById(Long studentId) {
+         studentRepository.deleteById(studentId);
     }
 }
