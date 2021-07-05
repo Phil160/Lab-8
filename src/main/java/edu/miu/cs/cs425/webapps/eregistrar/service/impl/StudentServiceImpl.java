@@ -1,0 +1,27 @@
+package edu.miu.cs.cs425.webapps.eregistrar.service.impl;
+
+import edu.miu.cs.cs425.webapps.eregistrar.model.Student;
+import edu.miu.cs.cs425.webapps.eregistrar.repository.StudentRepository;
+import edu.miu.cs.cs425.webapps.eregistrar.service.StudentService;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class StudentServiceImpl implements StudentService {
+    private StudentRepository studentRepository;
+
+    public StudentServiceImpl(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
+
+    @Override
+    public List<Student> getStudents() {
+        return studentRepository.findAll();
+    }
+
+    @Override
+    public Student saveStudent(Student student) {
+        return studentRepository.save(student);
+    }
+}

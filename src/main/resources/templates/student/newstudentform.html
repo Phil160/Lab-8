@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Student Form</title>
+</head>
+<body>
+<div>
+    <div><a href="/">Home </a></div>
+    <h1>Register New Student Form</h1>
+    <form action="/student/newstudentform" method="post" th:object="${student}">
+        <div>
+            <label for = "studentNumber">Student Number</label>
+            <input id="studentNumber" type="Number" th:value="${student.studentNumber}" name ="studentNumber">
+            <div>
+                <span style="color: red" th:if="${#fields.hasErrors('studentNumber')}" th:errors="*{studentNumber}"></span>
+            </div>
+        </div>
+        <div>
+            <label for = "firstName">First Name</label>
+            <input id="firstName" type="text" th:value="${student.firstName}" name ="firstName">
+            <div>
+                <span style="color: red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+            </div>
+        </div>
+        <div>
+            <label for = "middleName">Middle Name</label>
+            <input id="middleName" type="text" th:value="${student.middleName}" name ="middleName">
+        </div>
+        <div>
+            <label for = "lastName">Last Name</label>
+            <input id="lastName" type="text" th:value="${student.lastName}" name ="lastName">
+            <div>
+                <span style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+            </div>
+        </div>
+        <div>
+            <label for = "cgpa">CGPA</label>
+            <input id="cgpa" type="number" th:value="${student.cgpa}" name ="cgpa">
+        </div>
+        <div>
+            <label for = "enrollmentDate">Enrollment Date</label>
+            <input id="enrollmentDate" type="date" th:value="${student.enrollmentDate}" name ="enrollmentDate">
+<!--            <div>-->
+<!--                <span style="color: red" th:if="${#fields.hasErrors('enrollmentDate')}" th:errors="*{enrollmentDate}"></span>-->
+<!--            </div>-->
+        </div>
+        <div>
+            <label for ="isInternational"> Is International</label>
+            <select id="isInternational" th:field="*{isInternational}">
+                <option th:value="'Yes'" th:text="Yes"></option>
+                <option th:value="'No'" th:text="No"></option>
+            </select>
+        </div>
+        <div>
+            <button id ="btnSave" type="submit">Save Book</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
