@@ -22,13 +22,26 @@ public class StudentController {
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
+//    @GetMapping("/student/list")
+//    public ModelAndView listStudents(){
+//        var modelAndView = new ModelAndView();
+//        List<Student> students = studentService.getStudents();
+//        modelAndView.addObject("students",students);
+//        modelAndView.setViewName("student/list");
+//        return modelAndView;
+//    }
     @GetMapping("/student/list")
-    public ModelAndView listStudents(){
-        var modelAndView = new ModelAndView();
+    public String listStudents( Model model, String keyword){
+
         List<Student> students = studentService.getStudents();
-        modelAndView.addObject("students",students);
-        modelAndView.setViewName("student/list");
-        return modelAndView;
+        model.addAttribute("students",students);
+        if(keyword !=null){
+            model.addAttribute("students",studentService.findByKeyword(keyword));
+        }
+        else {
+            model.addAttribute("students",studentService.getStudents());
+        }
+        return "student/list";
     }
     @GetMapping(value = {"/student/newstudentform"})
     public String displayNewStudentForm(Model model){
@@ -73,4 +86,16 @@ public class StudentController {
         studentService.deleteStudentById(studentId);
         return "redirect:/student/list";
     }
+//    @GetMapping(value = {"/student/find/{studentId}"})
+//    public String findStudent(Model model,String keyword){
+//        List<Student> students = studentService.getStudents();
+//        model.addAttribute("students",students);
+//        if(keyword !=null){
+//            model.addAttribute("students",studentService.findByKeyword(keyword));
+//        }
+//        else {
+//            model.addAttribute("students",studentService.getStudents());
+//        }
+//        return "student/list";
+//    }
 }

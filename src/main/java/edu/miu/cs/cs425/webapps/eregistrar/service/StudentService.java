@@ -10,4 +10,5 @@ public interface StudentService {
     public abstract Student saveStudent(Student student);
     public abstract Student getStudentById(Long studentId);
     public void deleteStudentById(Long studentId);
+    public abstract List<Student> findByKeyword(String Keyword);
 }

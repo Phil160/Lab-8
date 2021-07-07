@@ -35,4 +35,9 @@ public class StudentServiceImpl implements StudentService {
     public void deleteStudentById(Long studentId) {
          studentRepository.deleteById(studentId);
     }
+
+    @Override
+    public List<Student> findByKeyword(String keyword) {
+        return studentRepository.findByKeyword(keyword);
+    }
 }

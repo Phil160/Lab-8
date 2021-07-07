@@ -5,15 +5,22 @@
     <title>Students</title>
 </head>
 <body>
-<div><a href="/">Home </a></div>
+<div><a href="/">Home</a> | <a href="/student/list">Students </a></div>
 <h1>List of Students</h1>
 <div>
     <a href="/student/newstudentform">Add New Student</a>
 </div>
+<br>
+<form action="/student/list" method="get">
+<input id ="txtSearch" type="text" name="keyword">
+    <button type="submit">Find</button>
+</form>
+<br>
 <div>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
+
             <th>#</th>
             <th>Student Number</th>
             <th>First Name</th>
